@@ -1,0 +1,4 @@
+.bundle
+tmp
+spec/reports
+coverage
