@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Tweet do
-
   describe '#from' do
     subject(:tweet) { Tweet.from received_tweet }
 
@@ -93,6 +92,4 @@ describe Tweet do
       expect(tweet.truncated).to eq(received_tweet.truncated)
     end
   end
-
-
 end
