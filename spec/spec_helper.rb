@@ -1,10 +1,5 @@
 ENV['ENVIRONMENT'] ||= 'test'
 
-require 'simplecov'
-require 'simplecov-rcov'
-SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-SimpleCov.start
-
 require_relative '../config/boot'
 require 'resque_spec'
 require 'database_cleaner'
