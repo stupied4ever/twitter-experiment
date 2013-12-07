@@ -20,3 +20,4 @@ because of that you need to export some variables. To handle that we use
 
 [twitter]: http://twitter.com
 [dev-twitter]: https://dev.twitter.com/
+[dotenv]: https://github.com/bkeepers/dotenv
