@@ -3,6 +3,13 @@ Twitter Experiment
 
 What about classify sentiments on [twitter][twitter] sample data?
 
+__ATTENTION__
+-------------
+
+As the name says, it's __experimental__. Please, don't be a fool, ths is not
+to be used on production environment.
+
+
 Configuration
 -------------
 
