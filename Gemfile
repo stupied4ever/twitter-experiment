@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'resque'
-gem 'clockwork'
 gem 'activemodel', '~> 4.0.0'
 gem 'twitter'
+gem 'classifier'
 
 group :test do
   gem 'dotenv'

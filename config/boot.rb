@@ -9,5 +9,8 @@ if ENV['ENVIRONMENT'].in? ['development', 'test']
   require 'dotenv'
   Dotenv.load!
 end
+
+require_relative '../lib/sentiment_finder'
+
 require_relative '../app/models/tweet'
 require_relative '../app/streams/forest'

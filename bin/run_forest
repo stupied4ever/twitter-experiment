@@ -2,4 +2,4 @@
 
 require_relative '../config/boot'
 
-Streams::Forest.new.run
+Streams::Forest.new.run true
