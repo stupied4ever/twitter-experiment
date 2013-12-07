@@ -2,3 +2,4 @@
 tmp
 spec/reports
 coverage
+.env
