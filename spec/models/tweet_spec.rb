@@ -7,8 +7,19 @@ describe Tweet do
 
     let(:received_tweet) {
       Twitter::Tweet.new(
-        id:   id,
-        text: text
+        id:                       id,
+        favorite_count:           favorite_count,
+        favorited:                favorited,
+        in_reply_to_screen_name:  in_reply_to_screen_name,
+        in_reply_to_attrs_id:     in_reply_to_attrs_id,
+        in_reply_to_status_id:    in_reply_to_status_id,
+        in_reply_to_user_id:      in_reply_to_user_id,
+        lang:                     lang,
+        retweet_count:            retweet_count,
+        retweeted:                retweeted,
+        source:                   source,
+        text:                     text,
+        truncated:                truncated,
       )
     }
 
