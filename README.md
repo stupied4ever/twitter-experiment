@@ -22,7 +22,7 @@ environment:
 
  - Use Twitter Streaming API to download tweets.
  ```
- foreman run forest
+ foreman run forest_consume
  ```
 
  That will consume [Twitter Sample Stream][twitter-streaming-api] and save on

@@ -4,7 +4,7 @@ module Streams
       @twitter_client = twitter_client
     end
 
-    def comsume
+    def run
       @twitter_client.sample(language: 'en') do |t|
         tweet = ::Tweet.from t
         tweet.trainable = tweet.is_trainable?

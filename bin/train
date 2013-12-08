@@ -16,5 +16,3 @@ if (trainable_total = trainable.count) > 0
   m.take_snapshot
   puts "Finished to train #{trainable_total} new tweets"
 end
-
-puts m.system.classify 'I hate bad words and you'
