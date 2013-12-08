@@ -54,12 +54,19 @@ because of that you need to export some variables. To handle that we use
  ```
  cp config/env.sample .env
  ```
+
+ - Edit .env with your own keys
+
+The Script saves Twitter data on [MongoDB][mongodb] so you need to configure
+it.
+
  - Copy mongoid.sample to mongoid.yml
 
  ```
  cp config/mongoid.sample mongoid.yml
  ```
- - Edit .env with your own keys
+
+ - Edit your config/mongoid.yml with your mongo variables.
 
 ----
 
