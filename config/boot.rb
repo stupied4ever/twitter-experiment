@@ -10,6 +10,7 @@ if ENV['ENVIRONMENT'].in? ['development', 'test']
   Dotenv.load!
 end
 
+require_relative '../lib/tweet_normalizer'
 require_relative '../lib/sentiment_finder'
 
 require_relative '../app/models/tweet'

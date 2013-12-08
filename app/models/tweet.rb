@@ -41,55 +41,6 @@ class Tweet
     tweet
   end
 
-  def remove_accents
-    I18n.transliterate text
-  end
-
-  def remove_accents!
-    self.text = remove_accents
-  end
-
-  def remove_users
-    self.text.gsub(twitter_user_regex, '')
-  end
-
-  def remove_users!
-    self.text = remove_users
-  end
-
-  def remove_not_alphanumeric
-    text.gsub!(/[^À-ÿ\w\s]/, ' ').gsub(/\s\s\s*/, ' ').strip
-  end
-
-  def remove_not_alphanumeric!
-    self.text = remove_not_alphanumeric
-  end
-
-  def remove_emoticons
-    self.text.gsub SentimentFinder.all_emoticons_regex, ''
-  end
-
-  def remove_emoticons!
-    self.text = remove_emoticons
-  end
-
-  def remove_rt
-    self.text.gsub(/(rt|RT)\s/, '')
-  end
-
-  def remove_rt!
-    self.text = remove_rt
-  end
-
-  def normalize!
-    self.text = text.downcase
-    remove_emoticons!
-    remove_rt!
-    remove_accents!
-    remove_users!
-    remove_not_alphanumeric!
-  end
-
   def trainable_sentiment
     sentiments = Array.new
     sentiments << :happy if SentimentFinder.happy_regex =~ text
@@ -110,11 +61,5 @@ class Tweet
 
   def is_trainable?
     trainable_sentiment.size  == 1
-  end
-
-  private
-
-  def twitter_user_regex
-    /\s*(?<=^|(?<=[^a-zA-Z0-9\.]))@([A-Za-z]+[A-Za-z0-9]+)\s*/
   end
 end
