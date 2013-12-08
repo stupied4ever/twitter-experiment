@@ -23,7 +23,7 @@ describe TweetNormalizer do
       let(:text) { 'RT Follow back? invert:)' }
       let(:text_without_rt) { 'Follow back? invert:)' }
 
-      it('removes RT but dont remove invert')do
+      it('removes RT but dont remove "invert"')do
         expect(remove_rt).to eq(text_without_rt)
       end
     end
