@@ -4,3 +4,4 @@ spec/reports
 coverage
 .env
 config/mongoid.yml
+bayes_data/
