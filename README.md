@@ -96,6 +96,7 @@ foreman run forest_statistics
 
 TODO:
  - Handle negations by attaching negation particle
+
   Eg.: I do not like fish: I do+not, do+not like, not+like fish
 ----
 
