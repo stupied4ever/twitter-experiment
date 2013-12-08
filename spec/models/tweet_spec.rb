@@ -147,6 +147,36 @@ describe Tweet do
     end
   end
 
+  describe '#remove_emoticons' do
+    subject(:remove_emoticons) { tweet.remove_emoticons }
+
+    let(:text) { 'Follow back? please:)' }
+    let(:text_without_emoticons) { 'Follow back? please' }
+
+    it('removes :)')do
+      expect(remove_emoticons).to eq(text_without_emoticons)
+    end
+
+    it('does not change tweet.text') do
+      remove_emoticons
+      expect(tweet.text).to eq(text)
+    end
+
+    describe '!' do
+      subject(:remove_emoticons) { tweet.remove_emoticons! }
+
+      it('removes :)')do
+        expect(remove_emoticons).to eq(text_without_emoticons)
+      end
+
+      it('change tweet.text') do
+        remove_emoticons
+        expect(tweet.text).to eq(text_without_emoticons)
+      end
+    end
+  end
+
+
   describe '#remove_accents' do
     subject(:remove_accents) { tweet.remove_accents }
 

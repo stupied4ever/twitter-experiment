@@ -61,6 +61,14 @@ class Tweet
     self.text = remove_not_alphanumeric
   end
 
+  def remove_emoticons
+    self.text.gsub SentimentFinder.all_emoticons_regex, ''
+  end
+
+  def remove_emoticons!
+    self.text = remove_emoticons
+  end
+
   def normalize!
     self.text = text.downcase
     remove_accents!
@@ -71,6 +79,12 @@ class Tweet
   def trainable_sentiment
     return :happy if SentimentFinder.happy_regex =~ text
     return :sad   if SentimentFinder.sad_regex   =~ text
+  end
+
+  def train classifier
+    if sentiment = trainable_sentiment
+      classifier.train sentiment, text
+    end
   end
 
   private
