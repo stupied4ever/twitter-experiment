@@ -105,5 +105,5 @@ foreman run forest_statistics
 [alexander-pak-patrick-paroubek]: http://www.lrec-conf.org/proceedings/lrec2010/summaries/385.html
 [f-score]: http://en.wikipedia.org/wiki/F1_Score
 [accuracy]: http://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification
-[precision] http://en.wikipedia.org/wiki/Precision_and_recall
-[recall] http://en.wikipedia.org/wiki/Precision_and_recall
+[precision]: http://en.wikipedia.org/wiki/Precision_and_recall
+[recall]: http://en.wikipedia.org/wiki/Precision_and_recall
