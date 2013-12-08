@@ -102,7 +102,7 @@ describe Tweet do
       let(:text) { "hangover :(" }
 
       it('is a sad tweet') do
-        expect(trainable_sentiment).to eq(:sad)
+        expect(trainable_sentiment).to eq([:sad])
       end
     end
 
@@ -113,9 +113,18 @@ describe Tweet do
       }
 
       it('is a happy tweet') do
-        expect(trainable_sentiment).to eq(:happy)
+        expect(trainable_sentiment).to eq([:happy])
       end
     end
+
+    context 'tweet with happy and sad emoticon' do
+      let(:text) { ":) hangover :(" }
+
+      it('is a sad tweet') do
+        expect(trainable_sentiment).to eq([:happy, :sad])
+      end
+    end
+
   end
 
   describe '#remove_users' do

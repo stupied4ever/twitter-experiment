@@ -87,14 +87,17 @@ class Tweet
   end
 
   def trainable_sentiment
-    return :happy if SentimentFinder.happy_regex =~ text
-    return :sad   if SentimentFinder.sad_regex   =~ text
+    sentiments = Array.new
+    sentiments << :happy if SentimentFinder.happy_regex =~ text
+    sentiments << :sad   if SentimentFinder.sad_regex   =~ text
+
+    sentiments
   end
 
   def train classifier
-    if sentiment = trainable_sentiment
+    if (sentiment = trainable_sentiment).size == 1
       normalize!
-      classifier.train sentiment, text
+      classifier.train sentiment.first, text
     end
   end
 
