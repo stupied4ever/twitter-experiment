@@ -37,11 +37,15 @@ class Tweet
   end
 
   def remove_accents!
-    self.text = I18n.transliterate text
+    self.text = remove_accents
   end
 
   def remove_users
     self.text.gsub(twitter_user_regex, '')
+  end
+
+  def remove_users!
+    self.text = remove_users
   end
 
   private

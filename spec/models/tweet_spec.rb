@@ -105,6 +105,23 @@ describe Tweet do
       expect(remove_users).to eq(text_without_users)
     end
 
+    it('does not change tweet.text') do
+      remove_users
+      expect(tweet.text).to eq(text)
+    end
+
+    describe '!' do
+      subject(:remove_users) { tweet.remove_users! }
+
+      it('removes @stankbieber')do
+        expect(remove_users).to eq(text_without_users)
+      end
+
+      it('change tweet.text') do
+        remove_users
+        expect(tweet.text).to eq(text_without_users)
+      end
+    end
   end
 
   describe '#remove_accents' do
