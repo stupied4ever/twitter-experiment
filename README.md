@@ -40,15 +40,15 @@ However, its possible to generate a script to create a corpus, and i did that.
 The corpus generator uses [Twitter][twitter] stream. This script is composed of
 two parts.
 
- - Use [Twitter Streaming API][twitter-streaming-api] to download tweets.
+ - Use Twitter Streaming API to download tweets.
  ```
  foreman run forest
  ```
 
- That will consume [Twitter][twitter] and save on a [MongoDB][mongodb]
- database. It will never finish, you need to decide how big you wnat your
- corpus, and when decided is enough, simple stop it. Trainable tweets will be
- flagged.
+ That will consume [Twitter Sample Stream][twitter-streaming-api] and save on
+ a [MongoDB][mongodb] database. It will never finish, you need to decide how
+ big you wnat your corpus, and when decided is enough, simple stop it.
+ Trainable tweets will be flagged.
 
  To detect __trainable_tweets__ I simple look to emoticons. If tweet has a
  happy or a sad emoticon, it's trainable tweet. This idea was not mine, I found
