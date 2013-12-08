@@ -33,7 +33,7 @@ because of that you need to export some variables. To handle that we use
 Copus Generation
 ----------------
 
-The corpus used to train the [Naive Bayes classifier][naive-bayes] is generated
+The corpus used to train the [Naive Bayes classifier][naive-bayes-classifier] is generated
 using [Twitter][twitter] stream.
 [Twitter Api Terms][twitter-api-terms] does not allow to share or resyndicate
 Twitter content, cause of that I will not do it.
@@ -68,6 +68,7 @@ This script is composed of two parts.
 [twitter]: http://twitter.com
 [dev-twitter]: https://dev.twitter.com/
 [dotenv]: https://github.com/bkeepers/dotenv
+[naive-bayes-classifier]: http://en.wikipedia.org/wiki/Naive_Bayes_classifier
 [twitter-api-terms]: https://dev.twitter.com/terms/api-terms
 [twitter-streaming-api]: https://dev.twitter.com/docs/streaming-apis
 [mongodb]: http://www.mongodb.org/
