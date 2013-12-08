@@ -68,6 +68,31 @@ it.
 
  - Edit your config/mongoid.yml with your mongo variables.
 
+Results
+-------
+
+To validate the experiment, I created some statistics. For that:
+
+ - I found a set of 4662 tweets.
+ - Separated them in 90% + 10%.
+ - Trainned those 90% on [Naive Bayes Classifier][naive-bayes-classifier].
+ - Classified those other 10% using the trainned classfier.
+
+After that i got these results:
+
+|-----------------------------------------------|
+|-------------------------|---------------------|
+| [F1-Score][f-score]     | 0.3819406140834712
+| [Accuracy][accuracy]    | 0.7644539614561028
+| [Recall][recall]        | 0.7699124930180599
+| [Precision][precision]  | 0.7660390516039052
+
+To reexecute the statistics you can do
+
+```
+foreman run forest_statistics
+```
+
 ----
 
 [twitter]: http://twitter.com
@@ -78,3 +103,7 @@ it.
 [twitter-streaming-api]: https://dev.twitter.com/docs/streaming-apis
 [mongodb]: http://www.mongodb.org/
 [alexander-pak-patrick-paroubek]: http://www.lrec-conf.org/proceedings/lrec2010/summaries/385.html
+[f-score]: http://en.wikipedia.org/wiki/F1_Score
+[accuracy]: http://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification
+[precision] http://en.wikipedia.org/wiki/Precision_and_recall
+[recall] http://en.wikipedia.org/wiki/Precision_and_recall

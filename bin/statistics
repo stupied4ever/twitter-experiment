@@ -15,7 +15,7 @@ tweets = Tweet.trainable.happy.take(number_of_objects).map {|t| t.id.to_s } +
 
 tweets.shuffle!
 
-train_size = (tweets.size * 0.8).to_i
+train_size = (tweets.size * 0.9).to_i
 
 train_set  = Tweet.find(tweets[0...train_size])
 assert_set = Tweet.find(tweets[train_size..-1])
