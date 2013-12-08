@@ -2,7 +2,7 @@ class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  scope :trainable, where(trainable: true)
+  scope :trainable, where(trainable: true).ne(trainned: true)
 
   scope :happy, where(text: SentimentFinder.happy_regex)
   scope :sad, where(text: SentimentFinder.sad_regex)
@@ -20,6 +20,7 @@ class Tweet
   field :text
   field :truncated,               type: Boolean
   field :trainable,               type: Boolean
+  field :trainned,                type: Boolean
 
   index( { trainable: 1 } )
 
@@ -97,10 +98,13 @@ class Tweet
     sentiments
   end
 
-  def train classifier
+  def train! classifier
     if (sentiment = trainable_sentiment).size == 1
       normalize!
-      classifier.train sentiment.first, text
+      classifier.send(
+        "train_#{ sentiment.first.to_s }", text
+      )
+      update trainned: true
     end
   end
 
