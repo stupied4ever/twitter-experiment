@@ -95,6 +95,34 @@ describe Tweet do
 
   let(:tweet) { Tweet.new(text: text)  }
 
+  describe '#is_trainable?' do
+    subject(:is_trainable?) { tweet.is_trainable? }
+
+    context 'tweet with sad emoticon' do
+      let(:text) { "hangover :(" }
+
+      it('is trainable') { expect(is_trainable?).to be_true }
+    end
+
+    context 'tweet with happy emoticon' do
+      let(:text) {
+        "lets celebrate our bb birthday together kekekek — haha! yes we"\
+        "will!!! :) http://t.co/jpItlVXKH0"
+      }
+
+      it('is trainable') { expect(is_trainable?).to be_true }
+    end
+
+    context 'tweet with happy and sad emoticon' do
+      let(:text) { ":) hangover :(" }
+
+      it('is not trainable') do
+        expect(is_trainable?).to be_false
+      end
+    end
+
+  end
+
   describe '#trainable_sentiment' do
     subject(:trainable_sentiment) { tweet.trainable_sentiment }
 

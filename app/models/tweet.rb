@@ -4,6 +4,9 @@ class Tweet
 
   scope :trainable_objects, where(trainable: true)
 
+  scope :happy, where(text: SentimentFinder.happy_regex)
+  scope :sad, where(text: SentimentFinder.sad_regex)
+
   field :favorite_count,          type: Integer
   field :favorited,               type: Boolean
   field :in_reply_to_screen_name
@@ -99,6 +102,10 @@ class Tweet
       normalize!
       classifier.train sentiment.first, text
     end
+  end
+
+  def is_trainable?
+    trainable_sentiment.size  == 1
   end
 
   private

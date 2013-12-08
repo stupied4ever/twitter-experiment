@@ -23,11 +23,6 @@ class SentimentFinder
     generate_regex emoticons
   end
 
-  def has_sentiment? text
-    regex = SentimentFinder.generate_regex(SentimentFinder.emoticons)
-    regex =~ text
-  end
-
   private
 
   def self.generate_regex emoticons

@@ -4,16 +4,10 @@ module Streams
       @twitter_client = twitter_client
     end
 
-    def run train_corpus = false
-      sentiment_finder = SentimentFinder.new
-
+    def run
       @twitter_client.sample(language: 'en') do |t|
         tweet = ::Tweet.from t
-
-        if train_corpus
-          next unless sentiment_finder.has_sentiment? tweet.text
-        end
-
+        tweet.trainable = tweet.is_trainable?
         tweet.save!
       end
     end
