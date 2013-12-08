@@ -92,4 +92,41 @@ describe Tweet do
       expect(tweet.truncated).to eq(received_tweet.truncated)
     end
   end
+
+  describe '#remove_accents' do
+    subject(:remove_accents) { tweet.remove_accents }
+
+    let(:tweet) { Tweet.new(text: text)  }
+
+    let(:text) {
+      "Rosa Luxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
+      "1871 — Berlim, 15 de janeiro de 1919), foi uma filósofa e economista "\
+      "marxista polonesa , alemã. Tornou-se mundialmente conhecida pela "\
+      "militância revolucionária ligada à Social-Democracia do Reino da "\
+      "Polônia e Lituânia (SDKP), ao Partido Social-Democrata da Alemanha "\
+      "(SPD) e ao Partido Social-Democrata Independente da Alemanha (USPD). "\
+      "Participou da fundação do grupo de tendência marxista do SPD, que "\
+      "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD)."
+    }
+
+    let(:text_without_accents) {
+      "Rosa Luxemburgo, em polones Roza Luksemburg (Zamosc, 5 de marco de "\
+      "1871 ? Berlim, 15 de janeiro de 1919), foi uma filosofa e economista "\
+      "marxista polonesa , alema. Tornou-se mundialmente conhecida pela "\
+      "militancia revolucionaria ligada a Social-Democracia do Reino da "\
+      "Polonia e Lituania (SDKP), ao Partido Social-Democrata da Alemanha "\
+      "(SPD) e ao Partido Social-Democrata Independente da Alemanha (USPD). "\
+      "Participou da fundacao do grupo de tendencia marxista do SPD, que "\
+      "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD)."
+    }
+
+    it('remove accents') {
+      expect(remove_accents).to eq(text_without_accents)
+    }
+
+    it('does not change twitter.text') {
+      remove_accents
+      expect(tweet.text).to eq(text)
+    }
+  end
 end

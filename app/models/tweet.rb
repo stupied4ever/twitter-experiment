@@ -31,4 +31,8 @@ class Tweet
     tweet.truncated               = object.truncated
     tweet
   end
+
+  def remove_accents
+    I18n.transliterate text
+  end
 end
