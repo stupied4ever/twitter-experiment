@@ -93,10 +93,23 @@ describe Tweet do
     end
   end
 
+  let(:tweet) { Tweet.new(text: text)  }
+
+  describe '#remove_users' do
+    subject(:remove_users) { tweet.remove_users }
+
+    let(:text) { '@stankbieber Follow back? please:) @stankbieber' }
+    let(:text_without_users) { 'Follow back? please:)' }
+
+    it('removes @stankbieber')do
+      expect(remove_users).to eq(text_without_users)
+    end
+
+  end
+
   describe '#remove_accents' do
     subject(:remove_accents) { tweet.remove_accents }
 
-    let(:tweet) { Tweet.new(text: text)  }
 
     let(:text) {
       "Rosa Luxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
