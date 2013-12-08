@@ -18,7 +18,7 @@ Twitter content, cause of that I will not do it.
 However, its possible to generate a script to create a corpus, and i did that.
 The corpus generator uses [Twitter][twitter] stream. This script is composed of
 two parts, but before it you need to [configure](#configuration) your
-enviroment:
+environment:
 
  - Use Twitter Streaming API to download tweets.
  ```
