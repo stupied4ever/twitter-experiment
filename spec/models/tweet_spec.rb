@@ -147,6 +147,46 @@ describe Tweet do
     end
   end
 
+  describe '#remove_rt' do
+    subject(:remove_rt) { tweet.remove_rt }
+
+    context 'text with rt on middle of word' do
+      let(:text) { 'RT Follow back? invert:)' }
+      let(:text_without_rt) { 'Follow back? invert:)' }
+
+      it('removes RT but dont remove invert')do
+        expect(remove_rt).to eq(text_without_rt)
+      end
+    end
+
+    context 'text with RT' do
+      let(:text) { 'RT Follow back? please:)' }
+      let(:text_without_rt) { 'Follow back? please:)' }
+
+      it('removes RT')do
+        expect(remove_rt).to eq(text_without_rt)
+      end
+
+      it('does not change tweet.text') do
+        remove_rt
+        expect(tweet.text).to eq(text)
+      end
+
+      describe '!' do
+        subject(:remove_rt) { tweet.remove_rt! }
+
+        it('removes RT')do
+          expect(remove_rt).to eq(text_without_rt)
+        end
+
+        it('change tweet.text') do
+          remove_rt
+          expect(tweet.text).to eq(text_without_rt)
+        end
+      end
+    end
+  end
+
   describe '#remove_emoticons' do
     subject(:remove_emoticons) { tweet.remove_emoticons }
 

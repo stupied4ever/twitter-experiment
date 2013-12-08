@@ -69,6 +69,14 @@ class Tweet
     self.text = remove_emoticons
   end
 
+  def remove_rt
+    self.text.gsub(/(rt|RT)\s/, '')
+  end
+
+  def remove_rt!
+    self.text = remove_rt
+  end
+
   def normalize!
     self.text = text.downcase
     remove_emoticons!
