@@ -48,6 +48,14 @@ class Tweet
     self.text = remove_users
   end
 
+  def remove_not_alphanumeric
+    text.gsub!(/[^À-ÿ\w\s]/, ' ').gsub(/\s\s\s*/, ' ').strip
+  end
+
+  def remove_not_alphanumeric!
+    self.text = remove_not_alphanumeric
+  end
+
   private
 
   def twitter_user_regex

@@ -127,7 +127,6 @@ describe Tweet do
   describe '#remove_accents' do
     subject(:remove_accents) { tweet.remove_accents }
 
-
     let(:text) {
       "Rosa Luxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
       "1871 — Berlim, 15 de janeiro de 1919), foi uma filósofa e economista "\
@@ -169,6 +168,54 @@ describe Tweet do
       it('change twitter.text') {
         remove_accents
         expect(tweet.text).to eq(text_without_accents)
+      }
+    end
+  end
+
+  describe '#remove_not_alphanumeric' do
+    subject(:remove_not_alphanumeric) { tweet.remove_not_alphanumeric }
+
+    let(:text) {
+      "Rosa Luxemburgo, em polones Roza Luksemburg (Zamosc, 5 de marco de "\
+      "1871 ? Berlim, 15 de janeiro de 1919), foi uma filosofa e economista "\
+      "marxista polonesa , alema. Tornou-se mundialmente conhecida pela "\
+      "militancia revolucionaria ligada a Social-Democracia do Reino da "\
+      "Polonia e Lituania (SDKP), ao Partido Social-Democrata da Alemanha "\
+      "(SPD) e ao Partido Social-Democrata Independente da Alemanha (USPD). "\
+      "Participou da fundacao do grupo de tendencia marxista do SPD, que "\
+      "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD)."
+    }
+
+    let(:text_without_not_alphanumeric) {
+      "Rosa Luxemburgo em polones Roza Luksemburg Zamosc 5 de marco de 1871 "\
+      "Berlim 15 de janeiro de 1919 foi uma filosofa e economista marxista "\
+      "polonesa alema Tornou se mundialmente conhecida pela militancia "\
+      "revolucionaria ligada a Social Democracia do Reino da Polonia e "\
+      "Lituania SDKP ao Partido Social Democrata da Alemanha SPD e ao "\
+      "Partido Social Democrata Independente da Alemanha USPD Participou "\
+      "da fundacao do grupo de tendencia marxista do SPD que viria a se "\
+      "tornar mais tarde o Partido Comunista da Alemanha KPD"
+    }
+
+    it('remove not alphanumeric characters') {
+      expect(remove_not_alphanumeric).to eq(text_without_not_alphanumeric)
+    }
+
+    it('does not change twitter.text') {
+      remove_not_alphanumeric
+      expect(tweet.text).to eq(text)
+    }
+
+    describe '!' do
+      subject(:remove_not_alphanumeric) { tweet.remove_not_alphanumeric! }
+
+      it('remove accents') {
+        expect(remove_not_alphanumeric).to eq(text_without_not_alphanumeric)
+      }
+
+      it('change twitter.text') {
+        remove_not_alphanumeric
+        expect(tweet.text).to eq(text_without_not_alphanumeric)
       }
     end
   end
