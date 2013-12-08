@@ -56,6 +56,13 @@ class Tweet
     self.text = remove_not_alphanumeric
   end
 
+  def normalize!
+    self.text = text.downcase
+    remove_accents!
+    remove_users!
+    remove_not_alphanumeric!
+  end
+
   private
 
   def twitter_user_regex

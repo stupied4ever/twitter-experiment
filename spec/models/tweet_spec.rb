@@ -176,25 +176,25 @@ describe Tweet do
     subject(:remove_not_alphanumeric) { tweet.remove_not_alphanumeric }
 
     let(:text) {
-      "Rosa Luxemburgo, em polones Roza Luksemburg (Zamosc, 5 de marco de "\
-      "1871 ? Berlim, 15 de janeiro de 1919), foi uma filosofa e economista "\
-      "marxista polonesa , alema. Tornou-se mundialmente conhecida pela "\
-      "militancia revolucionaria ligada a Social-Democracia do Reino da "\
-      "Polonia e Lituania (SDKP), ao Partido Social-Democrata da Alemanha "\
+      "Rosa Luxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
+      "1871 — Berlim, 15 de janeiro de 1919), foi uma filósofa e economista "\
+      "marxista polonesa , alemã. Tornou-se mundialmente conhecida pela "\
+      "militância revolucionária ligada à Social-Democracia do Reino da "\
+      "Polônia e Lituânia (SDKP), ao Partido Social-Democrata da Alemanha "\
       "(SPD) e ao Partido Social-Democrata Independente da Alemanha (USPD). "\
-      "Participou da fundacao do grupo de tendencia marxista do SPD, que "\
+      "Participou da fundação do grupo de tendência marxista do SPD, que "\
       "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD)."
     }
 
     let(:text_without_not_alphanumeric) {
-      "Rosa Luxemburgo em polones Roza Luksemburg Zamosc 5 de marco de 1871 "\
-      "Berlim 15 de janeiro de 1919 foi uma filosofa e economista marxista "\
-      "polonesa alema Tornou se mundialmente conhecida pela militancia "\
-      "revolucionaria ligada a Social Democracia do Reino da Polonia e "\
-      "Lituania SDKP ao Partido Social Democrata da Alemanha SPD e ao "\
-      "Partido Social Democrata Independente da Alemanha USPD Participou "\
-      "da fundacao do grupo de tendencia marxista do SPD que viria a se "\
-      "tornar mais tarde o Partido Comunista da Alemanha KPD"
+      "Rosa Luxemburgo em polonês Ró a Luksemburg Zamo 5 de março de 1871 "\
+      "Berlim 15 de janeiro de 1919 foi uma filósofa e economista marxista "\
+      "polonesa alemã Tornou se mundialmente conhecida pela militância "\
+      "revolucionária ligada à Social Democracia do Reino da Polônia e "\
+      "Lituânia SDKP ao Partido Social Democrata da Alemanha SPD e ao "\
+      "Partido Social Democrata Independente da Alemanha USPD Participou da "\
+      "fundação do grupo de tendência marxista do SPD que viria a se tornar "\
+      "mais tarde o Partido Comunista da Alemanha KPD"
     }
 
     it('remove not alphanumeric characters') {
@@ -216,6 +216,43 @@ describe Tweet do
       it('change twitter.text') {
         remove_not_alphanumeric
         expect(tweet.text).to eq(text_without_not_alphanumeric)
+      }
+    end
+  end
+
+  describe '#normalize' do
+    let(:text) {
+      "@rosaluxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
+      "1871 — Berlim, 15 de janeiro de 1919), foi uma filósofa e economista "\
+      "marxista polonesa , alemã. Tornou-se mundialmente conhecida pela "\
+      "militância revolucionária ligada à Social-Democracia do Reino da "\
+      "Polônia e Lituânia (SDKP), ao Partido Social-Democrata da Alemanha "\
+      "(SPD) e ao Partido Social-Democrata Independente da Alemanha (USPD). "\
+      "Participou da fundação do grupo de tendência marxista do SPD, que "\
+      "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD)."
+    }
+
+    let(:text_normalized) {
+      "em polones roza luksemburg zamosc 5 de marco de 1871 berlim 15 de "\
+      "janeiro de 1919 foi uma filosofa e economista marxista polonesa alema "\
+      "tornou se mundialmente conhecida pela militancia revolucionaria "\
+      "ligada a social democracia do reino da polonia e lituania sdkp ao "\
+      "partido social democrata da alemanha spd e ao partido social "\
+      "democrata independente da alemanha uspd participou da fundacao do "\
+      "grupo de tendencia marxista do spd que viria a se tornar mais tarde o "\
+      "partido comunista da alemanha kpd"
+    }
+
+    describe '!' do
+      subject(:normalize) { tweet.normalize! }
+
+      it('normalize text') {
+        expect(normalize).to eq(text_normalized)
+      }
+
+      it('change twitter.text') {
+        normalize
+        expect(tweet.text).to eq(text_normalized)
       }
     end
   end
