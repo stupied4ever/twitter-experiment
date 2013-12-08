@@ -71,6 +71,7 @@ class Tweet
 
   def normalize!
     self.text = text.downcase
+    remove_emoticons!
     remove_accents!
     remove_users!
     remove_not_alphanumeric!
@@ -83,6 +84,7 @@ class Tweet
 
   def train classifier
     if sentiment = trainable_sentiment
+      normalize!
       classifier.train sentiment, text
     end
   end

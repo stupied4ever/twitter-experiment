@@ -282,7 +282,7 @@ describe Tweet do
       "Polônia e Lituânia (SDKP), ao Partido Social-Democrata da Alemanha "\
       "(SPD) e ao Partido Social-Democrata Independente da Alemanha (USPD). "\
       "Participou da fundação do grupo de tendência marxista do SPD, que "\
-      "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD)."
+      "viria a se tornar mais tarde o Partido Comunista da Alemanha (KPD) :)."
     }
 
     let(:text_normalized) {
