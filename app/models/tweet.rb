@@ -80,6 +80,7 @@ class Tweet
   def normalize!
     self.text = text.downcase
     remove_emoticons!
+    remove_rt!
     remove_accents!
     remove_users!
     remove_not_alphanumeric!
