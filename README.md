@@ -1,7 +1,7 @@
 Twitter Experiment
 ==================
 
-What about classify sentiments on [twitter][twitter] sample data?
+What about classify sentiments on [Twitter][twitter] sample data?
 
 __ATTENTION__
 -------------
