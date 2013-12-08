@@ -21,6 +21,11 @@ because of that you need to export some variables. To handle that we use
  ```
  cp config/env.sample .env
  ```
+ - Copy mongoid.sample to mongoid.yml
+
+ ```
+ cp config/mongoid.sample mongoid.yml
+ ```
  - Edit .env with your own keys
 
 
