@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/boot'
+require 'madeleine'
+
+m = SnapshotMadeleine.new('bayes_data') { Classifier::Bayes.new :happy, :sad }
+
+Tweet.trainable.each do |tweet|
+   m.system.send("train_#{ tweet.trainable_sentiment.first.to_s }", tweet.text)
+end
+m.take_snapshot
+
+puts m.system.classify 'I hate bad words and you'

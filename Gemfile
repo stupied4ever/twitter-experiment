@@ -6,6 +6,7 @@ gem 'resque'
 gem 'activemodel', '~> 4.0.0'
 gem 'twitter'
 gem 'classifier'
+gem 'madeleine'
 
 group :test do
   gem 'dotenv'
