@@ -62,7 +62,7 @@ two parts.
  ```
  that will generate a folder ```bayes_data``` with yout train.
 
- ----
+----
 
 
 [twitter]: http://twitter.com
