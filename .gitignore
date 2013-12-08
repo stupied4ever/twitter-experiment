@@ -3,3 +3,4 @@ tmp
 spec/reports
 coverage
 .env
+config/mongoid.yml
