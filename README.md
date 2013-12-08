@@ -74,7 +74,7 @@ Results
 To validate the experiment, I created some statistics. For that:
 
  - I found a set of 4662 tweets.
- - Separated them in 90% + 10%.
+ - Split them in 90% + 10%.
  - Trainned those 90% on [Naive Bayes Classifier][naive-bayes-classifier].
  - Classified those other 10% using the trainned classfier.
 
