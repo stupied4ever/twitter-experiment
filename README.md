@@ -80,7 +80,8 @@ To validate the experiment, I created some statistics. For that:
 
 After that i got these results:
 
-|-------------------------|---------------------|
+| Index                   | Grade              |
+|-------------------------|--------------------|
 | [F1-Score][f-score]     | 0.3819406140834712
 | [Accuracy][accuracy]    | 0.7644539614561028
 | [Recall][recall]        | 0.7699124930180599
