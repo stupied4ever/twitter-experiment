@@ -6,7 +6,7 @@ describe TweetNormalizer do
   subject(:tweet) { Tweet.new text: text }
 
   describe '#remove_users' do
-    subject(:remove_users) { normalizer.remove_users tweet }
+    subject(:remove_users) { normalizer.remove_users tweet.text }
 
     let(:text) { '@stankbieber Follow back? please:) @stankbieber' }
     let(:text_without_users) { 'Follow back? please:)' }
@@ -14,28 +14,10 @@ describe TweetNormalizer do
     it('removes @stankbieber')do
       expect(remove_users).to eq(text_without_users)
     end
-
-    it('does not change tweet.text') do
-      remove_users
-      expect(tweet.text).to eq(text)
-    end
-
-    describe '!' do
-      subject(:remove_users) { normalizer.remove_users! tweet }
-
-      it('removes @stankbieber')do
-        expect(remove_users).to eq(text_without_users)
-      end
-
-      it('change tweet.text') do
-        remove_users
-        expect(tweet.text).to eq(text_without_users)
-      end
-    end
   end
 
   describe '#remove_rt' do
-    subject(:remove_rt) { normalizer.remove_rt tweet }
+    subject(:remove_rt) { normalizer.remove_rt tweet.text }
 
     context 'text with rt on middle of word' do
       let(:text) { 'RT Follow back? invert:)' }
@@ -53,29 +35,11 @@ describe TweetNormalizer do
       it('removes RT')do
         expect(remove_rt).to eq(text_without_rt)
       end
-
-      it('does not change tweet.text') do
-        remove_rt
-        expect(tweet.text).to eq(text)
-      end
-
-      describe '!' do
-        subject(:remove_rt) { normalizer.remove_rt! tweet }
-
-        it('removes RT')do
-          expect(remove_rt).to eq(text_without_rt)
-        end
-
-        it('change tweet.text') do
-          remove_rt
-          expect(tweet.text).to eq(text_without_rt)
-        end
-      end
     end
   end
 
   describe '#remove_emoticons' do
-    subject(:remove_emoticons) { normalizer.remove_emoticons tweet }
+    subject(:remove_emoticons) { normalizer.remove_emoticons tweet.text }
 
     let(:text) { 'Follow back? please:)' }
     let(:text_without_emoticons) { 'Follow back? please' }
@@ -83,29 +47,11 @@ describe TweetNormalizer do
     it('removes :)')do
       expect(remove_emoticons).to eq(text_without_emoticons)
     end
-
-    it('does not change tweet.text') do
-      remove_emoticons
-      expect(tweet.text).to eq(text)
-    end
-
-    describe '!' do
-      subject(:remove_emoticons) { normalizer.remove_emoticons! tweet }
-
-      it('removes :)')do
-        expect(remove_emoticons).to eq(text_without_emoticons)
-      end
-
-      it('change tweet.text') do
-        remove_emoticons
-        expect(tweet.text).to eq(text_without_emoticons)
-      end
-    end
   end
 
 
   describe '#remove_accents' do
-    subject(:remove_accents) { normalizer.remove_accents tweet }
+    subject(:remove_accents) { normalizer.remove_accents tweet.text }
 
     let(:text) {
       "Rosa Luxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
@@ -132,28 +78,12 @@ describe TweetNormalizer do
     it('remove accents') {
       expect(remove_accents).to eq(text_without_accents)
     }
-
-    it('does not change twitter.text') {
-      remove_accents
-      expect(tweet.text).to eq(text)
-    }
-
-    describe '!' do
-      subject(:remove_accents) { normalizer.remove_accents! tweet }
-
-      it('remove accents') {
-        expect(remove_accents).to eq(text_without_accents)
-      }
-
-      it('change twitter.text') {
-        remove_accents
-        expect(tweet.text).to eq(text_without_accents)
-      }
-    end
   end
 
   describe '#remove_not_alphanumeric' do
-    subject(:remove_not_alphanumeric) { normalizer.remove_not_alphanumeric tweet }
+    subject(:remove_not_alphanumeric) {
+      normalizer.remove_not_alphanumeric tweet.text
+    }
 
     let(:text) {
       "Rosa Luxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
@@ -180,29 +110,11 @@ describe TweetNormalizer do
     it('remove not alphanumeric characters') {
       expect(remove_not_alphanumeric).to eq(text_without_not_alphanumeric)
     }
-
-    it('does not change twitter.text') {
-      remove_not_alphanumeric
-      expect(tweet.text).to eq(text)
-    }
-
-    describe '!' do
-      subject(:remove_not_alphanumeric) {
-        normalizer.remove_not_alphanumeric! tweet
-      }
-
-      it('remove accents') {
-        expect(remove_not_alphanumeric).to eq(text_without_not_alphanumeric)
-      }
-
-      it('change twitter.text') {
-        remove_not_alphanumeric
-        expect(tweet.text).to eq(text_without_not_alphanumeric)
-      }
-    end
   end
 
   describe '#normalize' do
+    subject(:normalize) { normalizer.normalize tweet.text }
+
     let(:text) {
       "@rosaluxemburgo, em polonês Róża Luksemburg (Zamość, 5 de março de "\
       "1871 — Berlim, 15 de janeiro de 1919), foi uma filósofa e economista "\
@@ -225,17 +137,6 @@ describe TweetNormalizer do
       "partido comunista da alemanha kpd"
     }
 
-    describe '!' do
-      subject(:normalize) { normalizer.normalize! tweet }
-
-      it('normalize text') {
-        expect(normalize).to eq(text_normalized)
-      }
-
-      it('change twitter.text') {
-        normalize
-        expect(tweet.text).to eq(text_normalized)
-      }
-    end
+    it('normalize text') { expect(normalize).to eq(text_normalized) }
   end
 end

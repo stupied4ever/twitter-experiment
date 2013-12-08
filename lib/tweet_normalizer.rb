@@ -1,51 +1,31 @@
 class TweetNormalizer
-  def remove_accents tweet
-    I18n.transliterate tweet.text
+  def remove_accents text
+    I18n.transliterate text
   end
 
-  def remove_accents! tweet
-    tweet.text = remove_accents tweet
+  def remove_users text
+    text.gsub(twitter_user_regex, '')
   end
 
-  def remove_users tweet
-    tweet.text.gsub(twitter_user_regex, '')
+  def remove_not_alphanumeric text
+    text.gsub(/[^À-ÿ\w\s]/, ' ').gsub(/\s\s\s*/, ' ').strip
   end
 
-  def remove_users! tweet
-    tweet.text = remove_users tweet
+  def remove_emoticons text
+    text.gsub SentimentFinder.all_emoticons_regex, ''
   end
 
-  def remove_not_alphanumeric tweet
-    tweet.text.gsub(/[^À-ÿ\w\s]/, ' ').gsub(/\s\s\s*/, ' ').strip
+  def remove_rt text
+    text.gsub(/(rt|RT)\s/, '')
   end
 
-  def remove_not_alphanumeric! tweet
-    tweet.text = remove_not_alphanumeric tweet
-  end
-
-  def remove_emoticons tweet
-    tweet.text.gsub SentimentFinder.all_emoticons_regex, ''
-  end
-
-  def remove_emoticons! tweet
-    tweet.text = remove_emoticons tweet
-  end
-
-  def remove_rt tweet
-    tweet.text.gsub(/(rt|RT)\s/, '')
-  end
-
-  def remove_rt! tweet
-    tweet.text = remove_rt tweet
-  end
-
-  def normalize! tweet
-    tweet.text.downcase!
-    remove_emoticons! tweet
-    remove_rt! tweet
-    remove_accents! tweet
-    remove_users! tweet
-    remove_not_alphanumeric! tweet
+  def normalize text
+    text = remove_emoticons text.dup.downcase!
+    text = remove_accents text.dup
+    text = remove_users text
+    text = remove_rt text
+    text = remove_not_alphanumeric text
+    text
   end
 
   private

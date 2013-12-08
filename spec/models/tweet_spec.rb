@@ -120,7 +120,6 @@ describe Tweet do
         expect(is_trainable?).to be_false
       end
     end
-
   end
 
   describe '#trainable_sentiment' do
