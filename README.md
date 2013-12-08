@@ -80,12 +80,13 @@ To validate the experiment, I created some statistics. For that:
 
 After that i got these results:
 
-| Index                   | Grade              |
-|-------------------------|--------------------|
-| [F1-Score][f-score]     | 0.3819406140834712
-| [Accuracy][accuracy]    | 0.7644539614561028
-| [Recall][recall]        | 0.7699124930180599
-| [Precision][precision]  | 0.7660390516039052
+| Index                                        | Grade             |
+|----------------------------------------------|-------------------|
+| [F1-Score][f-score]                          | 0.387479175558645
+| [Accuracy][accuracy]                         | 0.775160599571734
+| [Recall][recall]                             | 0.774870646948735
+| [Precision][precision]                       | 0.775224132863021
+| [Matthews correlation][matthews-correlation] | 0.550321199143469
 
 To reexecute the statistics you can do
 
@@ -107,3 +108,4 @@ foreman run forest_statistics
 [accuracy]: http://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification
 [precision]: http://en.wikipedia.org/wiki/Precision_and_recall
 [recall]: http://en.wikipedia.org/wiki/Precision_and_recall
+[matthews-correlation]: http://en.wikipedia.org/wiki/Matthews_correlation_coefficient

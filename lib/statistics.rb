@@ -15,41 +15,25 @@ class Statistics
   def true_positives category
     @retrieved_documents.values.select { |d|
       d[:actual] == category && d[:predicted] == category
-    }
+    }.count.to_f
   end
 
   def true_negatives category
     @retrieved_documents.values.select { |d|
       d[:actual] != category && d[:predicted] != category
-    }
+    }.count.to_f
   end
 
   def false_positives category
     @retrieved_documents.values.select { |d|
       d[:actual] != category && d[:predicted] == category
-    }
+    }.count.to_f
   end
 
   def false_negatives category
     @retrieved_documents.values.select { |d|
       d[:actual] == category && d[:predicted] != category
-    }
-  end
-
-  def total_true_positive category
-    true_positives(category).count.to_f
-  end
-
-  def total_false_positive category
-    false_positives(category).count.to_f
-  end
-
-  def total_true_negative category
-    true_negatives(category).count.to_f
-  end
-
-  def total_false_negative category
-    false_negatives(category).count.to_f
+    }.count.to_f
   end
 
   def total_documents
@@ -58,19 +42,19 @@ class Statistics
 
   def accuracy category
     (
-      total_true_positive(category) + total_true_negative(category)
+      true_positives(category) + true_negatives(category)
     ) / total_documents
   end
 
   def recall category
-    total_true_positive(category) / (
-      total_true_positive(category) + total_false_negative(category)
+    true_positives(category) / (
+      true_positives(category) + false_negatives(category)
     )
   end
 
   def precision category
-    total_true_positive(category) / (
-      total_true_positive(category) + total_false_positive(category)
+    true_positives(category) / (
+      true_positives(category) + false_positives(category)
     )
   end
 
@@ -78,6 +62,30 @@ class Statistics
     precision(category) * recall(category) / (
       precision(category) + recall(category)
     )
+  end
+
+  def total_true_positive
+    @categories.inject(0) { |sum, category|
+      sum += true_positives(category)
+    } / @categories.size
+  end
+
+  def total_false_positive
+    @categories.inject(0) { |sum, category|
+      sum += false_positives(category)
+    } / @categories.size
+  end
+
+  def total_true_negative
+    @categories.inject(0) { |sum, category|
+      sum += true_negatives(category)
+    } / @categories.size
+  end
+
+  def total_false_negative
+    @categories.inject(0) { |sum, category|
+      sum += false_negatives(category)
+    } / @categories.size
   end
 
   def total_accuracy
@@ -102,5 +110,17 @@ class Statistics
     @categories.inject(0) { |sum, category|
       sum += f_score(category)
     } / @categories.size
+  end
+
+  def total_matthews_correlation
+    (
+      (total_true_positive * total_true_negative) -
+      (total_false_positive * total_false_negative)
+    )/ Math.sqrt(
+      (total_true_positive + total_false_positive) *
+      (total_true_positive + total_false_negative) *
+      (total_true_negative + total_false_positive) *
+      (total_true_negative + total_false_negative)
+    )
   end
 end

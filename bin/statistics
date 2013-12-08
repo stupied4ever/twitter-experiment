@@ -34,10 +34,10 @@ end
 puts "Total total_documents: #{ statistics.total_documents }"
 [:happy, :sad].each do |category|
   puts "Category: #{ category }"
-  puts "Total TP: #{ statistics.total_true_positive(category) }"
-  puts "Total FP: #{ statistics.total_false_positive(category) }"
-  puts "Total TN: #{ statistics.total_true_negative(category) }"
-  puts "Total FN: #{ statistics.total_false_negative(category) }"
+  puts "Total TP: #{ statistics.true_positives(category) }"
+  puts "Total FP: #{ statistics.false_positives(category) }"
+  puts "Total TN: #{ statistics.true_negatives(category) }"
+  puts "Total FN: #{ statistics.false_negatives(category) }"
   puts "Total accuracy: #{ statistics.accuracy(category) }"
   puts "Total recall: #{ statistics.recall(category) }"
   puts "Total precision: #{ statistics.precision(category) }"
@@ -46,7 +46,9 @@ end
 
 
 puts '------------------------------------------------------------------------'
-puts "Total F1-Score:  #{ statistics.total_f_score }"
-puts "Total Accuracy:  #{ statistics.total_accuracy }"
-puts "Total Recall:    #{ statistics.total_recall }"
-puts "Total Precision: #{ statistics.total_precision }"
+puts "Total F1-Score:             #{ statistics.total_f_score }"
+puts "Total Accuracy:             #{ statistics.total_accuracy }"
+puts "Total Recall:               #{ statistics.total_recall }"
+puts "Total Precision:            #{ statistics.total_precision }"
+puts "Total Matthews correlation: #{ statistics.total_matthews_correlation }"
+
