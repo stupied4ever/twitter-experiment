@@ -94,10 +94,12 @@ To reexecute the statistics you can do
 foreman run forest_statistics
 ```
 
-TODO:
+TODO
+-----
  - Handle negations by attaching negation particle
 
   Eg.: I do not like fish: I do+not, do+not like, not+like fish
+
 ----
 
 [twitter]: http://twitter.com
