@@ -49,11 +49,11 @@ class Tweet
     sentiments
   end
 
-  def train! classifier
+  def train! classifier, normalizer = TweetNormalizer.new
     if (sentiment = trainable_sentiment).size == 1
-      normalize!
+      normalized_text = normalizer.normalize self.text
       classifier.send(
-        "train_#{ sentiment.first.to_s }", text
+        "train_#{ sentiment.first.to_s }", normalized_text
       )
       update trainned: true
     end

@@ -4,12 +4,14 @@ require_relative '../config/boot'
 require 'madeleine'
 
 m = SnapshotMadeleine.new('bayes_data') { Classifier::Bayes.new :happy, :sad }
+
 trainable = Tweet.trainable
 
 if (trainable_total = trainable.count) > 0
   puts "Strarting to train #{trainable_total} new tweets"
+  normalizer = TweetNormalizer.new
   trainable.each do |tweet|
-     tweet.train! m.system
+     tweet.train! m.system, normalizer
   end
   m.take_snapshot
   puts "Finished to train #{trainable_total} new tweets"

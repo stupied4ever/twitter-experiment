@@ -20,7 +20,7 @@ class TweetNormalizer
   end
 
   def normalize text
-    text = remove_emoticons text.dup.downcase!
+    text = remove_emoticons text.downcase
     text = remove_accents text.dup
     text = remove_users text
     text = remove_rt text
