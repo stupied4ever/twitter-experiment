@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/boot'
+
+statistics = Statistics.new :happy, :sad
+classifier = Classifier::Bayes.new :happy, :sad
+normalizer = TweetNormalizer.new
+
+number_of_objects = [
+  Tweet.trainable.happy.count,
+  Tweet.trainable.sad.count
+].min
+tweets = Tweet.trainable.happy.take(number_of_objects).map {|t| t.id.to_s } +
+         Tweet.trainable.sad.take(number_of_objects).map {|t| t.id.to_s }
+
+tweets.shuffle!
+
+train_size = (tweets.size * 0.8).to_i
+
+train_set  = Tweet.find(tweets[0...train_size])
+assert_set = Tweet.find(tweets[train_size..-1])
+
+puts 'Started trainning'
+train_set.each { |tweet| tweet.train classifier, normalizer }
+puts 'Finished trainning'
+
+puts 'Started classifying'
+assert_set.each do |tweet|
+  actual    = tweet.classify(classifier, normalizer).downcase.to_sym
+  predicted = tweet.trainable_sentiment.first
+  statistics.add_document tweet.id.to_s, actual, predicted
+end
+
+puts "Total total_documents: #{ statistics.total_documents }"
+[:happy, :sad].each do |category|
+  puts "Category: #{ category }"
+  puts "Total TP: #{ statistics.total_true_positive(category) }"
+  puts "Total FP: #{ statistics.total_false_positive(category) }"
+  puts "Total TN: #{ statistics.total_true_negative(category) }"
+  puts "Total FN: #{ statistics.total_false_negative(category) }"
+  puts "Total accuracy: #{ statistics.accuracy(category) }"
+  puts "Total recall: #{ statistics.recall(category) }"
+  puts "Total precision: #{ statistics.precision(category) }"
+  puts "F-Score: #{ statistics.f_score(category) }"
+end
+
+
+puts '------------------------------------------------------------------------'
+puts "Total F1-Score:  #{ statistics.total_f_score }"
+puts "Total Accuracy:  #{ statistics.total_accuracy }"
+puts "Total Recall:    #{ statistics.total_recall }"
+puts "Total Precision: #{ statistics.total_precision }"

@@ -12,6 +12,7 @@ end
 
 require_relative '../lib/tweet_normalizer'
 require_relative '../lib/sentiment_finder'
+require_relative '../lib/statistics'
 
 require_relative '../app/models/tweet'
 require_relative '../app/streams/twitter'
