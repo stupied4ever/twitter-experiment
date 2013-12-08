@@ -35,4 +35,7 @@ class Tweet
   def remove_accents
     I18n.transliterate text
   end
+  def remove_accents!
+    self.text = I18n.transliterate text
+  end
 end

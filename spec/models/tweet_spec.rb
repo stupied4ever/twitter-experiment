@@ -128,5 +128,18 @@ describe Tweet do
       remove_accents
       expect(tweet.text).to eq(text)
     }
+
+    describe '!' do
+      subject(:remove_accents) { tweet.remove_accents! }
+
+      it('remove accents') {
+        expect(remove_accents).to eq(text_without_accents)
+      }
+
+      it('change twitter.text') {
+        remove_accents
+        expect(tweet.text).to eq(text_without_accents)
+      }
+    end
   end
 end
