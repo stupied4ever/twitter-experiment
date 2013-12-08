@@ -14,4 +14,4 @@ require_relative '../lib/tweet_normalizer'
 require_relative '../lib/sentiment_finder'
 
 require_relative '../app/models/tweet'
-require_relative '../app/streams/forest'
+require_relative '../app/streams/twitter'

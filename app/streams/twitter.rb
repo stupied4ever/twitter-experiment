@@ -1,10 +1,10 @@
 module Streams
-  class Forest
+  class Twitter
     def initialize twitter_client = twitter_client
       @twitter_client = twitter_client
     end
 
-    def run
+    def comsume
       @twitter_client.sample(language: 'en') do |t|
         tweet = ::Tweet.from t
         tweet.trainable = tweet.is_trainable?
@@ -15,7 +15,7 @@ module Streams
     private
 
     def twitter_client
-      Twitter::Streaming::Client.new do |config|
+      ::Twitter::Streaming::Client.new do |config|
         config.consumer_key       = ENV.fetch 'CONSUMER_KEY'
         config.consumer_secret    = ENV.fetch 'CONSUMER_SECRET'
         config.oauth_token        = ENV.fetch 'OAUTH_TOKEN'
