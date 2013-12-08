@@ -30,8 +30,8 @@ because of that you need to export some variables. To handle that we use
  - Edit .env with your own keys
 
 
-Copus
------
+Copus Generation
+----------------
 
 The corpus used to train the [Naive Bayes classifier][naive-bayes] is generated
 using [Twitter][twitter] stream.
