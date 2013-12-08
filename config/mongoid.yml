@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: twitter_dev
+      database: twitter_experiments
       hosts:
         - localhost:27017
       options:
@@ -9,7 +9,7 @@ development:
 test:
   sessions:
     default:
-      database: twitter_test
+      database: twitter_experiments_test
       hosts:
         - localhost:27017
       options:

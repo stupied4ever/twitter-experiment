@@ -2,6 +2,8 @@ class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  scope :trainable_objects, where(trainable: true)
+
   field :favorite_count,          type: Integer
   field :favorited,               type: Boolean
   field :in_reply_to_screen_name
@@ -14,6 +16,9 @@ class Tweet
   field :source
   field :text
   field :truncated,               type: Boolean
+  field :trainable,               type: Boolean
+
+  index( { trainable: 1 } )
 
   def self.from object
     tweet = ::Tweet.new
@@ -61,6 +66,11 @@ class Tweet
     remove_accents!
     remove_users!
     remove_not_alphanumeric!
+  end
+
+  def trainable_sentiment
+    return :happy if SentimentFinder.happy_regex =~ text
+    return :sad   if SentimentFinder.sad_regex   =~ text
   end
 
   private

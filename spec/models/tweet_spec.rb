@@ -95,6 +95,29 @@ describe Tweet do
 
   let(:tweet) { Tweet.new(text: text)  }
 
+  describe '#trainable_sentiment' do
+    subject(:trainable_sentiment) { tweet.trainable_sentiment }
+
+    context 'tweet with sad emoticon' do
+      let(:text) { "hangover :(" }
+
+      it('is a sad tweet') do
+        expect(trainable_sentiment).to eq(:sad)
+      end
+    end
+
+    context 'tweet with happy emoticon' do
+      let(:text) {
+        "lets celebrate our bb birthday together kekekek — haha! yes we"\
+        "will!!! :) http://t.co/jpItlVXKH0"
+      }
+
+      it('is a happy tweet') do
+        expect(trainable_sentiment).to eq(:happy)
+      end
+    end
+  end
+
   describe '#remove_users' do
     subject(:remove_users) { tweet.remove_users }
 
