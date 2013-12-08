@@ -2,7 +2,7 @@ class Tweet
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  scope :trainable_objects, where(trainable: true)
+  scope :trainable, where(trainable: true)
 
   scope :happy, where(text: SentimentFinder.happy_regex)
   scope :sad, where(text: SentimentFinder.sad_regex)
