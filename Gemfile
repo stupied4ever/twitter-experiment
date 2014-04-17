@@ -8,7 +8,7 @@ gem 'twitter'
 gem 'classifier'
 gem 'madeleine'
 
-group :test do
+group :test, :development do
   gem 'dotenv'
   gem 'webmock'
   gem 'factory_girl'
@@ -16,5 +16,3 @@ group :test do
   gem 'resque_spec'
   gem 'database_cleaner'
 end
-
-gem 'pry-debugger'
