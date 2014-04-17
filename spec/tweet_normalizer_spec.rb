@@ -20,8 +20,8 @@ describe TweetNormalizer do
     subject(:remove_rt) { normalizer.remove_rt tweet.text }
 
     context 'text with rt on middle of word' do
-      let(:text) { 'RT Follow back? invert:)' }
-      let(:text_without_rt) { 'Follow back? invert:)' }
+      let(:text) { 'RT Follow back? invert :)' }
+      let(:text_without_rt) { 'Follow back? invert :)' }
 
       it('removes RT but dont remove "invert"')do
         expect(remove_rt).to eq(text_without_rt)

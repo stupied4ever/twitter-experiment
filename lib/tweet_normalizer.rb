@@ -16,7 +16,7 @@ class TweetNormalizer
   end
 
   def remove_rt text
-    text.gsub(/(rt|RT)\s/, '')
+    text.gsub(/(\s|^)(rt|RT)\s/, '')
   end
 
   def normalize text
